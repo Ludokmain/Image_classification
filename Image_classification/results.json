@@ -1,0 +1,328 @@
+{
+  "versions": {
+    "python": "3.13.5",
+    "torch": "2.15.0",
+    "torchvision": "0.29.2",
+    "sklearn": "1.9.1"
+  },
+  "device": "mps",
+  "seed": 42,
+  "cudnn_deterministic": true,
+  "deterministic_algorithms": "True (warn_only)",
+  "cublas_workspace_config": ":4096:8",
+  "pretrained_weights": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+  "class_imbalance_ratio": {
+    "train": 1.081,
+    "val": 1.053,
+    "test": 1.136
+  },
+  "hyperparameters": {
+    "neural_networks": {
+      "batch_size": 32,
+      "lr": 0.0001,
+      "weight_decay": 0.01,
+      "epochs": 10,
+      "optimizer": "AdamW",
+      "loss": "CrossEntropyLoss",
+      "selection_rule": "epoch with max validation accuracy"
+    },
+    "logistic_regression": {
+      "C_grid": [
+        0.001,
+        0.01,
+        0.1,
+        1
+      ],
+      "max_iter": 5000,
+      "scaler": "StandardScaler (fit on train)",
+      "train_augmentation": "10 augmented copies of the training set (train_transform)",
+      "selection_rule": "C with max validation accuracy"
+    },
+    "linear_svm": {
+      "C_grid": [
+        0.001,
+        0.01,
+        0.1,
+        1
+      ],
+      "max_iter": 10000,
+      "scaler": "StandardScaler (fit on train)",
+      "train_augmentation": "10 augmented copies of the training set (train_transform)",
+      "selection_rule": "C with max validation accuracy"
+    },
+    "val_fraction": 0.2,
+    "bootstrap_samples": 1000
+  },
+  "histories": {
+    "Full fine-tuning": {
+      "train_loss": [
+        3.241921816183173,
+        2.0078134199847346,
+        1.283311129912086,
+        0.9976898062488307,
+        0.8397386751097181,
+        0.7465313925691273,
+        0.6705821927474893,
+        0.6518357920905818,
+        0.5881206153527551,
+        0.5566780832798585
+      ],
+      "train_acc": [
+        19.05570652173913,
+        52.78532608695652,
+        65.72690217391305,
+        71.70516304347827,
+        76.05298913043478,
+        78.125,
+        81.01222826086956,
+        80.74048913043478,
+        82.67663043478261,
+        84.06929347826087
+      ],
+      "val_loss": [
+        2.154222737187925,
+        1.1206749392592388,
+        0.7516097089518672,
+        0.603963359542515,
+        0.5486676524514738,
+        0.4926679056623708,
+        0.47994016305260034,
+        0.4643570994553359,
+        0.4389182484668234,
+        0.4150436086499173
+      ],
+      "val_acc": [
+        55.97826086956522,
+        72.69021739130434,
+        78.80434782608695,
+        83.55978260869566,
+        83.28804347826087,
+        85.19021739130434,
+        84.10326086956522,
+        85.46195652173913,
+        84.91847826086956,
+        87.09239130434783
+      ]
+    },
+    "Classifier-head training": {
+      "train_loss": [
+        3.1081402690514275,
+        1.9497829027797864,
+        1.2979523286871288,
+        1.0196175873279572,
+        0.8631553902574207,
+        0.7795484224739282,
+        0.7357024077488028,
+        0.6809257670589115,
+        0.6635598174255827,
+        0.6221476239354714
+      ],
+      "train_acc": [
+        24.422554347826086,
+        61.44701086956522,
+        70.61820652173913,
+        75.30570652173913,
+        77.88722826086956,
+        79.21195652173913,
+        80.63858695652173,
+        81.38586956521739,
+        81.69157608695652,
+        82.43885869565217
+      ],
+      "val_loss": [
+        2.190315329510233,
+        1.160572710244552,
+        0.7560023328532344,
+        0.5982942555261694,
+        0.512947739466377,
+        0.48187025344890094,
+        0.4443910912327144,
+        0.42383213276448456,
+        0.3984630781671275,
+        0.40701623455337854
+      ],
+      "val_acc": [
+        66.30434782608695,
+        79.6195652173913,
+        85.19021739130434,
+        86.82065217391305,
+        87.22826086956522,
+        86.0054347826087,
+        87.63586956521739,
+        87.36413043478261,
+        87.90760869565217,
+        86.95652173913044
+      ]
+    }
+  },
+  "results": [
+    {
+      "method": "Full fine-tuning",
+      "selected": "epoch 10",
+      "best_val": "val acc 87.09%",
+      "train_acc": 96.4,
+      "test_acc": 83.59,
+      "test_acc_ci95": [
+        82.5,
+        84.76
+      ],
+      "test_macro_f1": 0.8318,
+      "train_test_gap": 12.81,
+      "trainable_params": 1555781,
+      "train_time_s": 310.6,
+      "top_confusions": [
+        [
+          "American Pit Bull Terrier",
+          "Staffordshire Bull Terrier",
+          26
+        ],
+        [
+          "British Shorthair",
+          "Russian Blue",
+          19
+        ],
+        [
+          "Chihuahua",
+          "Shiba Inu",
+          16
+        ],
+        [
+          "American Pit Bull Terrier",
+          "German Shorthaired",
+          16
+        ],
+        [
+          "American Pit Bull Terrier",
+          "American Bulldog",
+          15
+        ]
+      ]
+    },
+    {
+      "method": "Classifier-head training",
+      "selected": "epoch 9",
+      "best_val": "val acc 87.91%",
+      "train_acc": 92.83,
+      "test_acc": 84.96,
+      "test_acc_ci95": [
+        83.84,
+        86.07
+      ],
+      "test_macro_f1": 0.8477,
+      "train_test_gap": 7.88,
+      "trainable_params": 628773,
+      "train_time_s": 156.1,
+      "top_confusions": [
+        [
+          "American Pit Bull Terrier",
+          "Staffordshire Bull Terrier",
+          21
+        ],
+        [
+          "Birman",
+          "Ragdoll",
+          17
+        ],
+        [
+          "British Shorthair",
+          "Russian Blue",
+          15
+        ],
+        [
+          "Ragdoll",
+          "Birman",
+          14
+        ],
+        [
+          "American Pit Bull Terrier",
+          "American Bulldog",
+          13
+        ]
+      ]
+    },
+    {
+      "method": "Features + Logistic Regression",
+      "selected": "C=0.001",
+      "best_val": "val acc 88.99%",
+      "train_acc": 96.16,
+      "test_acc": 85.09,
+      "test_acc_ci95": [
+        84.06,
+        86.24
+      ],
+      "test_macro_f1": 0.8489,
+      "train_test_gap": 11.07,
+      "trainable_params": 21349,
+      "train_time_s": 118.9,
+      "top_confusions": [
+        [
+          "American Pit Bull Terrier",
+          "Staffordshire Bull Terrier",
+          22
+        ],
+        [
+          "Birman",
+          "Ragdoll",
+          15
+        ],
+        [
+          "American Pit Bull Terrier",
+          "American Bulldog",
+          15
+        ],
+        [
+          "Ragdoll",
+          "Birman",
+          15
+        ],
+        [
+          "Maine Coon",
+          "Bengal",
+          13
+        ]
+      ]
+    },
+    {
+      "method": "Features + Linear SVM",
+      "selected": "C=0.001",
+      "best_val": "val acc 87.91%",
+      "train_acc": 98.23,
+      "test_acc": 84.98,
+      "test_acc_ci95": [
+        83.84,
+        86.1
+      ],
+      "test_macro_f1": 0.8465,
+      "train_test_gap": 13.25,
+      "trainable_params": 21349,
+      "train_time_s": 212.6,
+      "top_confusions": [
+        [
+          "American Pit Bull Terrier",
+          "American Bulldog",
+          17
+        ],
+        [
+          "Ragdoll",
+          "Birman",
+          17
+        ],
+        [
+          "American Pit Bull Terrier",
+          "Staffordshire Bull Terrier",
+          16
+        ],
+        [
+          "Russian Blue",
+          "British Shorthair",
+          11
+        ],
+        [
+          "Staffordshire Bull Terrier",
+          "American Bulldog",
+          11
+        ]
+      ]
+    }
+  ]
+}
