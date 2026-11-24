@@ -16,6 +16,7 @@ All other dependencies are pinned in `requirements.txt`. The results were produc
 ```bash
 git clone https://github.com/Ludokmain/Image_classification.git
 cd Image_classification
+cd Image_classification
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
