@@ -14,7 +14,7 @@ This repository compares three transfer-learning strategies for classifying the 
 All other dependencies are pinned in `requirements.txt`. The results were produced on Apple Silicon (MPS). The script uses `cuda`, `mps` or `cpu`, in that order, depending on what is available.
 
 ```bash
-git clone https://github.com/Ludokmain/<repository-name>.git
+git clone https://github.com/Ludokmain/Image_classification.git
 cd <repository-name>
 python3 -m venv .venv
 source .venv/bin/activate
@@ -42,7 +42,7 @@ python project.py
 The run takes about 15–20 minutes on MPS. All outputs are written to the repository root and overwrite the files provided.
 
 ## Outputs
-
+All the outputs are provided in this repository without the need to run the project.
 | File | Content |
 |------|---------|
 | `results.json` | Versions, seeds, hyperparameters, selected checkpoint/C, training curves, all metrics |
